@@ -1,9 +1,10 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Platform } from 'react-native';
 import { useSelector } from 'react-redux';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import ProductItem from '../../components/shop/ProductItem';
-import HeaderButtons from '../../components/UI/HeaderButton';
+import HeaderButton from '../../components/UI/HeaderButton';
 
 const UserProductsScreen = props => {
     const userProducts = useSelector(state => state.products.userProducts);
