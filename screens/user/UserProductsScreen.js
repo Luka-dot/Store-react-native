@@ -8,7 +8,16 @@ const UserProductsScreen = props => {
     const userProducts = useSelector(state => state.products.userProducts);
     
     return (
-        <FlatList data={userProducts} />
+        <FlatList 
+            data={userProducts} 
+            renderItem={itemData => <ProductItem 
+                                        image={itemData.item.imageUrl} 
+                                        title={itemData.item.title} 
+                                        price={itemData.item.price} 
+                                        onViewDetails={() => {}}
+                                        onAddToCart={() => {}}
+                                    />} 
+        />
     )
 };
 
