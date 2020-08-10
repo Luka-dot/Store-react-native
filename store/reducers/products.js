@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
     switch (action.type) {
         case CREATE_PRODUCT:
             const newProduct = new Product(
-                new Date.toString(), 
+                new Date().toString(), 
                 'u1', 
                 action.productData.title, 
                 action.productData.imageUrl,
