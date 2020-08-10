@@ -10,6 +10,7 @@ import * as productsActions from '../../store/actions/products';
 
 const UserProductsScreen = props => {
     const userProducts = useSelector(state => state.products.userProducts);
+    const dispatch = useDispatch();
     
     return (
         <FlatList 
@@ -33,7 +34,7 @@ const UserProductsScreen = props => {
                                             color={Colors.primary}
                                             title="DELETE"
                                             onPress={() => {
-                                                dispatchEvent(productsActions.deleteProduct(itemData.item.id))
+                                                dispatch(productsActions.deleteProduct(itemData.item.id))
                                             }}
                                         />
                                     </ProductItem>
