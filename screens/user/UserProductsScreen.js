@@ -11,6 +11,10 @@ import * as productsActions from '../../store/actions/products';
 const UserProductsScreen = props => {
     const userProducts = useSelector(state => state.products.userProducts);
     const dispatch = useDispatch();
+
+    const editProductHandler = (id) => {
+        props.navigation.navigate('EditProduct', { productId: id });
+    };
     
     return (
         <FlatList 
@@ -20,14 +24,14 @@ const UserProductsScreen = props => {
                                         title={itemData.item.title} 
                                         price={itemData.item.price} 
                                         onSelect={() => {
-
+                                            editProductHandler(itemData.item.id)
                                         }}
                                     >
                                         <Button
                                             color={Colors.primary}
                                             title="EDIT"
                                             onPress={() => {
-                                            
+                                                editProductHandler(itemData.item.id);
                                             }}
                                     />
                                         <Button
