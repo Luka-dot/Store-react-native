@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, ScrollView, Text, TextInput, StyleSheet, Platform } from 'react-native';
+import { View, ScrollView, Text, TextInput, StyleSheet, Platform, Alert } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -15,8 +15,13 @@ const EditProductScreen = props => {
     const [imageUrl, setImageUrl] = useState(editedProduct ? editedProduct.imageUrl : '');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState(editedProduct ? editedProduct.description : '');
+    const [titleIsValid, setTitleIsValid] = useState(false);
 
     const submitHandler = useCallback(() => {
+        if (!titleIsValid) {
+            Alert.alert('Wrong input', 'Please make sure for is filled up.', [{text: 'Ok'}])
+            return;
+        }
         if (editedProduct) {
             dispatch(productsActions.updateProduct(prodId, title, description, imageUrl))
         } else {
@@ -27,7 +32,17 @@ const EditProductScreen = props => {
 
     useEffect(() => {
         props.navigation.setParams({ submit: submitHandler });
-    }, [submitHandler])
+    }, [submitHandler]);
+
+    const titleChangeHandler = text => {
+        if (text.trim().length === 0) {
+            setTitleIsValid(false);
+        } else {
+            setTitleIsValid(true);
+        }
+
+        setTitle(text);
+    };
 
     return (
         <ScrollView>
@@ -37,7 +52,7 @@ const EditProductScreen = props => {
                     <TextInput 
                         style={styles.input} 
                         value={title} 
-                        onChangeText={text => setTitle(text)} 
+                        onChangeText={titleChangeHandler} 
                         keyboardType= 'default'
                         autoCapitalize= 'sentences'
                         autoCorrect={true}
@@ -45,6 +60,7 @@ const EditProductScreen = props => {
                         onEndEditing={() => console.log('end editing')}
                         onSubmitEditing={() => console.log('submitEditing')}  // fires when "next" button is pressed on native keyboard
                     />
+                    {!titleIsValid && <Text>Please enter valid title!</Text>}
                 </View>
                 <View style={styles.formControl} >
                     <Text style={styles.label} >Image URL</Text>
