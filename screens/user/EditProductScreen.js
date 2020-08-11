@@ -41,6 +41,9 @@ const EditProductScreen = props => {
                         keyboardType= 'default'
                         autoCapitalize= 'sentences'
                         autoCorrect={true}
+                        returnKeyType= 'next'
+                        onEndEditing={() => console.log('end editing')}
+                        onSubmitEditing={() => console.log('submitEditing')}  // fires when "next" button is pressed on native keyboard
                     />
                 </View>
                 <View style={styles.formControl} >
