@@ -8,14 +8,14 @@ import * as productsActions from '../../store/actions/products';
 
 // created outside FC to prevent unnecessary renders
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
-const formReducer =  (state, action) => {
+const formReducer = (state, action) => {
     if (action.type === FORM_INPUT_UPDATE) {
 
     }
 };
 
 const EditProductScreen = props => {
-    const prodId= props.navigation.getParam('productId');
+    const prodId = props.navigation.getParam('productId');
     const editedProduct = useSelector(state => state.products.userProducts.find(prod => prod.id === prodId));
     const dispatch = useDispatch();
 
@@ -26,13 +26,13 @@ const EditProductScreen = props => {
             imageUrl: editedProduct ? editedProduct.imageUrl : '',
             description: editedProduct ? editedProduct.description : '',
             price: ''
-        }, 
+        },
         inputValidities: {
             title: editedProduct ? true : false,
             imageUrl: editedProduct ? true : false,
             description: editedProduct ? true : false,
             price: editedProduct ? true : false,
-        }, 
+        },
         formIsValid: editedProduct ? true : false
     });
 
@@ -44,7 +44,7 @@ const EditProductScreen = props => {
 
     const submitHandler = useCallback(() => {
         if (!titleIsValid) {
-            Alert.alert('Wrong input', 'Please make sure for is filled up.', [{text: 'Ok'}])
+            Alert.alert('Wrong input', 'Please make sure for is filled up.', [{ text: 'Ok' }])
             return;
         }
         if (editedProduct) {
@@ -63,17 +63,17 @@ const EditProductScreen = props => {
         let isValid = false
         if (text.trim().length > 0) {
             isValid = true;
-         //   setTitleIsValid(false);
-         // } else {
-         //   setTitleIsValid(true);
+            //   setTitleIsValid(false);
+            // } else {
+            //   setTitleIsValid(true);
         }
 
         // setTitle(text);
         dispatchFormState({
-            type: FORM_INPUT_UPDATE, 
-            value: text, 
-            isValid: isValid, 
-            input: 'tit;e' 
+            type: FORM_INPUT_UPDATE,
+            value: text,
+            isValid: isValid,
+            input: 'tit;e'
         })
     };
 
@@ -82,14 +82,14 @@ const EditProductScreen = props => {
             <View style={styles.form}>
                 <View style={styles.formControl} >
                     <Text style={styles.label} >Title</Text>
-                    <TextInput 
-                        style={styles.input} 
-                        value={title} 
-                        onChangeText={titleChangeHandler} 
-                        keyboardType= 'default'
-                        autoCapitalize= 'sentences'
+                    <TextInput
+                        style={styles.input}
+                        value={title}
+                        onChangeText={titleChangeHandler}
+                        keyboardType='default'
+                        autoCapitalize='sentences'
                         autoCorrect={true}
-                        returnKeyType= 'next'
+                        returnKeyType='next'
                         onEndEditing={() => console.log('end editing')}
                         onSubmitEditing={() => console.log('submitEditing')}  // fires when "next" button is pressed on native keyboard
                     />
@@ -97,29 +97,29 @@ const EditProductScreen = props => {
                 </View>
                 <View style={styles.formControl} >
                     <Text style={styles.label} >Image URL</Text>
-                    <TextInput 
-                        style={styles.input} 
-                        value={imageUrl} 
-                        onChangeText={text => setImageUrl(text)} 
+                    <TextInput
+                        style={styles.input}
+                        value={imageUrl}
+                        onChangeText={text => setImageUrl(text)}
                     />
                 </View>
                 {editedProduct ? null :
-                <View style={styles.formControl} >
-                    <Text style={styles.label} >Price</Text>
-                    <TextInput 
-                        style={styles.input} 
-                        value={price} 
-                        onChangeText={text => setPrice(text)} 
-                        keyboardType= 'decimal-pad'
-                    />
-                </View>
+                    <View style={styles.formControl} >
+                        <Text style={styles.label} >Price</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={price}
+                            onChangeText={text => setPrice(text)}
+                            keyboardType='decimal-pad'
+                        />
+                    </View>
                 }
                 <View style={styles.formControl} >
                     <Text style={styles.label} >Description</Text>
-                    <TextInput 
-                        style={styles.input} 
-                        value={description} 
-                        onChangeText={text => setDescription(text)} 
+                    <TextInput
+                        style={styles.input}
+                        value={description}
+                        onChangeText={text => setDescription(text)}
                     />
                 </View>
             </View>
@@ -132,12 +132,12 @@ EditProductScreen.navigationOptions = navData => {
     return {
         headerTitle: navData.navigation.getParam('productId') ? 'Edit Product!!!' : 'Add Product',
         headerRight: <HeaderButtons HeaderButtonComponent={HeaderButton}>
-                            <Item
-                                title="Save"
-                                iconName={Platform.OS === 'android' ? 'md-checkmark' : 'ios-checkmark'}
-                                onPress={submitFn}
-                        />
-     </HeaderButtons>
+            <Item
+                title="Save"
+                iconName={Platform.OS === 'android' ? 'md-checkmark' : 'ios-checkmark'}
+                onPress={submitFn}
+            />
+        </HeaderButtons>
     }
 };
 
