@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Button, Platform, ScrollView } from 'react-native';
+import { FlatList, Button, Platform } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
@@ -32,20 +32,20 @@ const ProductsOverviewScreen = props => {
             selectItemHandler(itemData.item.id, itemData.item.title)
           }}
         >
-              <Button
-                color={Colors.primary}
-                title="View Details"
-                onPress={() => {
-                  selectItemHandler(itemData.item.id, itemData.item.title)
-                }}
-              />
-              <Button
-                color={Colors.primary}
-                title="To Cart"
-                onPress={() => {
-                  dispatch(cartActions.addToCart(itemData.item))
-                }}
-              />
+          <Button
+            color={Colors.primary}
+            title="View Details"
+            onPress={() => {
+              selectItemHandler(itemData.item.id, itemData.item.title)
+            }}
+          />
+          <Button
+            color={Colors.primary}
+            title="To Cart"
+            onPress={() => {
+              dispatch(cartActions.addToCart(itemData.item))
+            }}
+          />
         </ProductItem>
       )}
     />
