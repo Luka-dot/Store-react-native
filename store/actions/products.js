@@ -14,7 +14,16 @@ export const createProduct = (title, description, imageUrl, price) => {
             headers: {
                 'Content-Type': 'application/json'
             },
+            body: JSON.stringify({
+                title,
+                description,
+                imageUrl,
+                price
+            })
+        }).then(response => {
+            ...
         });
+
         dispatch( { type: CREATE_PRODUCT, productData: {
             title: title,
             description: description,
