@@ -73,7 +73,7 @@ const EditProductScreen = props => {
             type: FORM_INPUT_UPDATE,
             value: text,
             isValid: isValid,
-            input: 'tit;e'
+            input: 'title'
         })
     };
 
