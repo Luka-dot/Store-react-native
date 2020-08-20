@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList, Button, Platform, ActivityIndicator } from 'react-native';
+import { FlatList, Button, Platform, ActivityIndicator, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
@@ -29,6 +29,14 @@ const ProductsOverviewScreen = props => {
       productTitle: title
     });
   };
+
+  if (isLoading) {
+    return (
+      <View style={StyleSheet.centered} >
+        <ActivityIndicator size ="large" color={Colors.primary} />
+      </View>
+    )
+  }
 
   return (
     <FlatList
