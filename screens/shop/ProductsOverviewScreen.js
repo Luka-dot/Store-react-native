@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList, Button, Platform, ActivityIndicator, View } from 'react-native';
+import { FlatList, Button, Platform, ActivityIndicator, View, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
@@ -32,10 +32,18 @@ const ProductsOverviewScreen = props => {
 
   if (isLoading) {
     return (
-      <View style={StyleSheet.centered} >
+      <View style={styles.centered} >
         <ActivityIndicator size ="large" color={Colors.primary} />
       </View>
-    )
+    );
+  };
+
+  if (!isLoading && products.length ===0) {
+    return (
+      <View style={styles.centered} >
+        <Text> No Products Found </Text>
+      </View>
+    );
   }
 
   return (
@@ -98,5 +106,13 @@ ProductsOverviewScreen.navigationOptions = navData => {
     )
   };
 };
+
+const styles = StyleSheet.create({
+  centered: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})
 
 export default ProductsOverviewScreen;
