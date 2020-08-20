@@ -8,7 +8,10 @@ export const SET_PRODUCTS = 'SET_PRODUCTS';
 export const fetchProduct = () => {
     return async dispatch => {
         // can execute any async code.
-        const response = await fetch('https://rn-store-9a607.firebaseio.com/products.json'
+
+        try {
+
+            const response = await fetch('https://rn-store-9a607.firebaseio.com/products.json'
         );
 
         const resData = await response.json();
@@ -26,8 +29,11 @@ export const fetchProduct = () => {
         }
 
         dispatch({ type: SET_PRODUCTS, products: loadedProducts });
-    }
-}
+        } catch(err) {
+            throw err;
+        };      
+};
+};
 
 export const deleteProduct = productId => {
     return { type: DELETE_PRODUCT, pid: productId };
