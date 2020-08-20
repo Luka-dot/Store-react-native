@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { FlatList, Button, Platform } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { FlatList, Button, Platform, ActivityIndicator } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
@@ -10,11 +10,17 @@ import * as productsActions from '../../store/actions/products';
 import Colors from '../../constants/Colors';
 
 const ProductsOverviewScreen = props => {
+  const [isLoading, setIsLoading] = useState(false);
   const products = useSelector(state => state.products.availableProducts);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(productsActions.fetchProduct());
+    const loadProducts = async () => {
+      setIsLoading(true);
+      await dispatch(productsActions.fetchProduct());
+      setIsLoading(false);
+    };
+    loadProducts();
   }, [dispatch]);
 
   const selectItemHandler = (id, title) => {
