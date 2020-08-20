@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { FlatList, Button, Platform, ActivityIndicator, View, StyleSheet } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { FlatList, Button, Platform, ActivityIndicator, View, StyleSheet, Button } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
@@ -11,17 +11,23 @@ import Colors from '../../constants/Colors';
 
 const ProductsOverviewScreen = props => {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
   const products = useSelector(state => state.products.availableProducts);
   const dispatch = useDispatch();
 
+  const loadProducts = useCallback(async () => {
+    setIsLoading(true);
+    try {
+    await dispatch(productsActions.fetchProduct());
+    } catch (err) {
+      setError(err.message)
+    }
+    setIsLoading(false);
+  }, [dispatch, setIsLoading, setError]);
+
   useEffect(() => {
-    const loadProducts = async () => {
-      setIsLoading(true);
-      await dispatch(productsActions.fetchProduct());
-      setIsLoading(false);
-    };
     loadProducts();
-  }, [dispatch]);
+  }, [dispatch, loadProducts]);
 
   const selectItemHandler = (id, title) => {
     props.navigation.navigate('ProductDetail', {
@@ -29,6 +35,15 @@ const ProductsOverviewScreen = props => {
       productTitle: title
     });
   };
+
+  if (err) {
+    return (
+      <View style={styles.centered} >
+        <Text>Error getting data</Text>
+        <Button title="Try Again" onPress={loadProducts} />
+      </View>
+    );
+  }
 
   if (isLoading) {
     return (

@@ -11,8 +11,12 @@ export const fetchProduct = () => {
 
         try {
 
-            const response = await fetch('https://rn-store-9a607.firebaseio.com/products.json'
+        const response = await fetch('https://rn-store-9a607.firebaseio.com/products.json'
         );
+
+        if (!response.ok) {
+            throw new Error('Something went wrong!');
+        }
 
         const resData = await response.json();
         const loadedProducts = [];
