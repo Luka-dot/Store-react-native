@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { FlatList, Button, Platform, ActivityIndicator, View, StyleSheet, Button } from 'react-native';
+import { FlatList, Button, Platform, ActivityIndicator, View, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
@@ -40,7 +40,7 @@ const ProductsOverviewScreen = props => {
     return (
       <View style={styles.centered} >
         <Text>Error getting data</Text>
-        <Button title="Try Again" onPress={loadProducts} />
+        <Button title="Try Again" onPress={loadProducts} color={Colors.primary} />
       </View>
     );
   }
