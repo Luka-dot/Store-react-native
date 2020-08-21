@@ -46,7 +46,7 @@ const ProductsOverviewScreen = props => {
     });
   };
 
-  if (err) {
+  if (error) {
     return (
       <View style={styles.centered} >
         <Text>Error getting data</Text>

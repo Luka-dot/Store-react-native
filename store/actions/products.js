@@ -42,8 +42,8 @@ export const fetchProduct = () => {
 export const deleteProduct = productId => {
     return async dispatch => {
 
-        const response = await fetch(`https://rn-store-9a607.firebaseio.com/${productId}.json`, {
-            method: 'DELETE',
+        await fetch(`https://rn-store-9a607.firebaseio.com/products/${productId}.json`, {
+            method: 'DELETE'
             
         });
 

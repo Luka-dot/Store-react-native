@@ -57,16 +57,16 @@ export default (state = initialState, action) => {
                 userProducts: updatedUserProducts
             }
 
-        case DELETE_PRODUCT: 
-            return {
-                ...state,
-                userProducts: state.userProducts.filter(
+            case DELETE_PRODUCT:
+                return {
+                  ...state,
+                  userProducts: state.userProducts.filter(
                     product => product.id !== action.pid
-                ),
-                availableProducts: state.availableProducts.filter(
+                  ),
+                  availableProducts: state.availableProducts.filter(
                     product => product.id !== action.pid
-                ),
-            };
+                  )
+                };
     }
     return state;
 };
