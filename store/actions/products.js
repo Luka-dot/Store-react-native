@@ -40,7 +40,23 @@ export const fetchProduct = () => {
 };
 
 export const deleteProduct = productId => {
-    return { type: DELETE_PRODUCT, pid: productId };
+    return async dispatch => {
+
+        const response = await fetch('https://rn-store-9a607.firebaseio.com/products.json', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                title,
+                description,
+                imageUrl,
+                price
+            })
+        });
+
+        dispatch({ type: DELETE_PRODUCT, pid: productId });
+    };   
 };
 
 export const createProduct = (title, description, imageUrl, price) => {
