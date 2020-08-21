@@ -77,13 +77,29 @@ export const createProduct = (title, description, imageUrl, price) => {
 };
 
 export const updateProduct = (id, title, description, imageUrl) => {
-    return { type: UPDATE_PRODUCT,
-                    pid: id,
-                     productData: {
-                        title: title,
-                        description: description,
-                        imageUrl: imageUrl,
-                    } 
+    return async dispatch => {
+
+        const response = await fetch(`https://rn-store-9a607.firebaseio.com/products.json`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                title,
+                description,
+                imageUrl,
+                price
+            })
+        });
+
+        dispatch({ type: UPDATE_PRODUCT,
+            pid: id,
+             productData: {
+                title: title,
+                description: description,
+                imageUrl: imageUrl,
+            } 
+        });
     };
-}
+};
 
