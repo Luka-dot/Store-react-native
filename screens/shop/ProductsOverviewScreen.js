@@ -26,6 +26,15 @@ const ProductsOverviewScreen = props => {
     setIsLoading(false);
   }, [dispatch, setIsLoading, setError]);
 
+  // this useEffect is to refetch on navigation changes
+  useEffect(() => {
+    const willFocusSub = props.navigation.addListener('willFocus', loadProducts);
+
+    return () => {
+      willFocusSub.remove();
+    }
+    }, [loadProducts])
+
   useEffect(() => {
     loadProducts();
   }, [dispatch, loadProducts]);
