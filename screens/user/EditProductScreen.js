@@ -5,7 +5,8 @@ import {
   StyleSheet,
   Platform,
   Alert,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  ActivityIndicator
 } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector, useDispatch } from 'react-redux';
@@ -76,6 +77,7 @@ const EditProductScreen = props => {
     setError(null);
     setIsLoading(true);
 
+    try {
     if (editedProduct) {
       await dispatch(
         productsActions.updateProduct(
@@ -95,6 +97,9 @@ const EditProductScreen = props => {
         )
       );
     }
+  } catch (err) {
+      setError(err.message);
+  };
     setIsLoading(false);
     props.navigation.goBack();
   }, [dispatch, prodId, formState]);
