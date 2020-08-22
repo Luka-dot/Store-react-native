@@ -16,7 +16,7 @@ export const fetchOrders = () => {
       const loadedOrders = [];
 
       for (const key in resData) {
-        loadedProducts.push(
+        loadedOrders.push(
           new Order(
             key,
             resData[key].cartItems,

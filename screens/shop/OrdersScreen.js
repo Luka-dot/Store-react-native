@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, Platform, ActivityIndicator, StyleSheet } from 'react-native';
+import { FlatList, View, Platform, ActivityIndicator, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
@@ -22,7 +22,7 @@ const OrdersScreen = props => {
   }, [dispatch]);
 
   if (isLoading) {
-    return <View style={StyleSheet.centered}>
+    return <View style={styles.centered}>
       <ActivityIndicator size='large' color={Colors.primary} />
     </View>
   }

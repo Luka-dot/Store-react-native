@@ -44,7 +44,7 @@ const formReducer = (state, action) => {
 
 const EditProductScreen = props => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = setState();
+  const [error, setError] = useState();
 
   const prodId = props.navigation.getParam('productId');
   const editedProduct = useSelector(state =>
