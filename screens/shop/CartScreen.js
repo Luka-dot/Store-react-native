@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, Button, StyleSheet } from 'react-native';
+import { View, Text, FlatList, Button, StyleSheet, ActivityIndicator } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Colors from '../../constants/Colors';
@@ -41,12 +41,15 @@ const CartScreen = props => {
           Total:{' '}
           <Text style={styles.amount}>${Math.round(cartTotalAmount.toFixed(2)) }</Text>
         </Text>
+        {isLoading ? ( <ActivityIndicator size='small' color={Colors.primary} />
+        ) : (
         <Button
           color={Colors.accent}
           title="Order Now"
           disabled={cartItems.length === 0}
           onPress={sendOrderHandler}
         />
+        )}
       </View>
       <FlatList
         data={cartItems}
