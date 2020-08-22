@@ -11,32 +11,34 @@ export const fetchProduct = () => {
 
         try {
 
-        const response = await fetch('https://rn-store-9a607.firebaseio.com/products.json'
-        );
+            const response = await fetch('https://rn-store-9a607.firebaseio.com/products.json');
 
-        if (!response.ok) {
-            throw new Error('Something went wrong!');
-        }
+            if (!response.ok) {
+                throw new Error('Something went wrong!');
+            }
 
-        const resData = await response.json();
-        const loadedProducts = [];
+            const resData = await response.json();
+            const loadedProducts = [];
 
-        for (const key in resData) {
-            loadedProducts.push(new Product(
-                key, 
-                'u1', 
-                resData[key].title, 
-                resData[key].imageUrl, 
-                resData[key].description, 
-                resData[key].price
-            ));
-        }
+            for (const key in resData) {
+                loadedProducts.push(new Product(
+                    key,
+                    'u1',
+                    resData[key].title,
+                    resData[key].imageUrl,
+                    resData[key].description,
+                    resData[key].price
+                ));
+            }
 
-        dispatch({ type: SET_PRODUCTS, products: loadedProducts });
-        } catch(err) {
+            dispatch({
+                type: SET_PRODUCTS,
+                products: loadedProducts
+            });
+        } catch (err) {
             throw err;
-        };      
-};
+        };
+    };
 };
 
 export const deleteProduct = productId => {
@@ -44,11 +46,12 @@ export const deleteProduct = productId => {
 
         await fetch(`https://rn-store-9a607.firebaseio.com/products/${productId}.json`, {
             method: 'DELETE'
-            
         });
-
-        dispatch({ type: DELETE_PRODUCT, pid: productId });
-    };   
+        dispatch({
+            type: DELETE_PRODUCT,
+            pid: productId
+        });
+    };
 };
 
 export const createProduct = (title, description, imageUrl, price) => {
@@ -73,15 +76,17 @@ export const createProduct = (title, description, imageUrl, price) => {
 
         console.log(resData);
 
-        dispatch( { type: CREATE_PRODUCT, productData: {
-            id: resData.name,
-            title: title,
-            description: description,
-            imageUrl: imageUrl,
-            price: price
-            } 
+        dispatch({
+            type: CREATE_PRODUCT,
+            productData: {
+                id: resData.name,
+                title: title,
+                description: description,
+                imageUrl: imageUrl,
+                price: price
+            }
         });
-    }   
+    }
 };
 
 export const updateProduct = (id, title, description, imageUrl) => {
@@ -99,14 +104,14 @@ export const updateProduct = (id, title, description, imageUrl) => {
             })
         });
 
-        dispatch({ type: UPDATE_PRODUCT,
+        dispatch({
+            type: UPDATE_PRODUCT,
             pid: id,
-             productData: {
+            productData: {
                 title: title,
                 description: description,
                 imageUrl: imageUrl,
-            } 
+            }
         });
     };
 };
-
