@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useReducer } from 'react';
+import React, { useState, useEffect, useCallback, useReducer } from 'react';
 import {
   View,
   ScrollView,
@@ -40,6 +40,9 @@ const formReducer = (state, action) => {
 };
 
 const EditProductScreen = props => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = setState();
+
   const prodId = props.navigation.getParam('productId');
   const editedProduct = useSelector(state =>
     state.products.userProducts.find(prod => prod.id === prodId)
@@ -62,15 +65,19 @@ const EditProductScreen = props => {
     formIsValid: editedProduct ? true : false
   });
 
-  const submitHandler = useCallback(() => {
+  const submitHandler = useCallback(async () => {
     if (!formState.formIsValid) {
       Alert.alert('Wrong input!', 'Please check the errors in the form.', [
         { text: 'Okay' }
       ]);
       return;
     }
+
+    setError(null);
+    setIsLoading(true);
+
     if (editedProduct) {
-      dispatch(
+      await dispatch(
         productsActions.updateProduct(
           prodId,
           formState.inputValues.title,
@@ -79,7 +86,7 @@ const EditProductScreen = props => {
         )
       );
     } else {
-      dispatch(
+      await dispatch(
         productsActions.createProduct(
           formState.inputValues.title,
           formState.inputValues.description,
@@ -88,6 +95,7 @@ const EditProductScreen = props => {
         )
       );
     }
+    setIsLoading(false);
     props.navigation.goBack();
   }, [dispatch, prodId, formState]);
 
