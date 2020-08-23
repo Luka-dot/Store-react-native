@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScrollView, View, KeyboardAvoidingView, StyleSheet, Button } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import Input from '../../components/UI/Input';
 import Card from '../../components/UI/Card';
@@ -12,6 +13,7 @@ const AuthScreen = props => {
             keyboardVerticalOffset={50} 
             style={styles.screen}
         >
+            <LinearGradient colors={['#ffedff', '#ffe3ff']}>
             <Card style={styles.authContainer} >
                 <ScrollView>
                     <Input 
@@ -22,7 +24,7 @@ const AuthScreen = props => {
                         email
                         autoCapitalize="none"
                         errorMessage="Please enter valid email address"
-                        onValueChange={() => {}}
+                        onInputChange={() => {}}
                         initialValue=""
                     />
                     <Input 
@@ -34,7 +36,7 @@ const AuthScreen = props => {
                         minLength={5}
                         autoCapitalize="none"
                         errorMessage="Please enter valid password"
-                        onValueChange={() => {}}
+                        onInputChange={() => {}}
                         initialValue=""
                     />
                     <Button 
@@ -49,9 +51,14 @@ const AuthScreen = props => {
                     />
                 </ScrollView>
             </Card>
+            </LinearGradient>
         </KeyboardAvoidingView>
     )
 };
+
+AuthScreen.navigationOptions = {
+    headerTitle: 'Authenticate'
+}
 
 const styles = StyleSheet.create({
     screen: {
