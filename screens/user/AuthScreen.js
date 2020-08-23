@@ -44,7 +44,7 @@ const AuthScreen = props => {
                     />
                     <Button 
                         title="Switch to Sign Up"
-                        color={Colors.primary}
+                        color={Colors.accent}
                         onPress={() => {}}
                     />
                 </ScrollView>
@@ -54,7 +54,17 @@ const AuthScreen = props => {
 };
 
 const styles = StyleSheet.create({
-
+    screen: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItem: 'center'
+    },
+    authContainer: {
+        width: '80%',
+        maxWidth: 400,
+        maxHeight: 400,
+        padding: 20
+    }
 });
 
 export default AuthScreen;
