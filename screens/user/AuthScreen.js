@@ -13,7 +13,7 @@ const AuthScreen = props => {
             keyboardVerticalOffset={50} 
             style={styles.screen}
         >
-            <LinearGradient colors={['#ffedff', '#ffe3ff']}>
+            <LinearGradient colors={['#ffedff', '#ffe3ff']} style={styles.gradient}>
             <Card style={styles.authContainer} >
                 <ScrollView>
                     <Input 
@@ -39,16 +39,20 @@ const AuthScreen = props => {
                         onInputChange={() => {}}
                         initialValue=""
                     />
+                    <View style={styles.buttonContainer}>
                     <Button 
                         title="login"
                         color={Colors.primary}
                         onPress={() => {}}
                     />
+                    </View>
+                    <View style={styles.buttonContainer}>
                     <Button 
                         title="Switch to Sign Up"
                         color={Colors.accent}
                         onPress={() => {}}
                     />
+                    </View>
                 </ScrollView>
             </Card>
             </LinearGradient>
@@ -63,15 +67,23 @@ AuthScreen.navigationOptions = {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
+        
+    },
+    gradient: {
+        flex: 1,
         justifyContent: 'center',
-        alignItem: 'center'
+        alignItem: 'center',
     },
     authContainer: {
         width: '80%',
         maxWidth: 400,
         maxHeight: 400,
-        padding: 20
+        padding: 20,
+    },
+    buttonContainer: {
+        marginTop: 10
     }
+    
 });
 
 export default AuthScreen;
