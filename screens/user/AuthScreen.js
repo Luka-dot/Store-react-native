@@ -1,8 +1,9 @@
 import React from 'react';
-import { ScrollView, View, KeyboardAvoidingView, StyleSheet } from 'react-native';
+import { ScrollView, View, KeyboardAvoidingView, StyleSheet, Button } from 'react-native';
 
 import Input from '../../components/UI/Input';
 import Card from '../../components/UI/Card';
+import Colors from '../../constants/Colors';
 
 const AuthScreen = props => {
     return (
@@ -35,6 +36,16 @@ const AuthScreen = props => {
                         errorMessage="Please enter valid password"
                         onValueChange={() => {}}
                         initialValue=""
+                    />
+                    <Button 
+                        title="login"
+                        color={Colors.primary}
+                        onPress={() => {}}
+                    />
+                    <Button 
+                        title="Switch to Sign Up"
+                        color={Colors.primary}
+                        onPress={() => {}}
                     />
                 </ScrollView>
             </Card>
