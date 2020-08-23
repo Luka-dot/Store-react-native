@@ -24,6 +24,18 @@ const AuthScreen = props => {
                         onValueChange={() => {}}
                         initialValue=""
                     />
+                    <Input 
+                        id="password" 
+                        label="PASSWORD"
+                        keyboardType="default"
+                        secureTextEntry
+                        required
+                        minLength={5}
+                        autoCapitalize="none"
+                        errorMessage="Please enter valid password"
+                        onValueChange={() => {}}
+                        initialValue=""
+                    />
                 </ScrollView>
             </Card>
         </KeyboardAvoidingView>
