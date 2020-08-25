@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { ScrollView, View, KeyboardAvoidingView, StyleSheet, Button } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useDispatch } from 'react-redux';
@@ -8,11 +8,50 @@ import Card from '../../components/UI/Card';
 import Colors from '../../constants/Colors';
 import * as authActions from '../../store/actions/auth';
 
+const formReducer = (state, action) => {
+    if (action.type === FORM_INPUT_UPDATE) {
+      const updatedValues = {
+        ...state.inputValues,
+        [action.input]: action.value
+      };
+      const updatedValidities = {
+        ...state.inputValidities,
+        [action.input]: action.isValid
+      };
+      let updatedFormIsValid = true;
+      for (const key in updatedValidities) {
+        updatedFormIsValid = updatedFormIsValid && updatedValidities[key];
+      }
+      return {
+        formIsValid: updatedFormIsValid,
+        inputValidities: updatedValidities,
+        inputValues: updatedValues
+      };
+    }
+    return state;
+  };
+
 const AuthScreen = props => {
     const dispatch = useDispatch();
 
-    const singUpHandler = () => {
+    const [formState, dispatchFormState] = useReducer(formReducer, {
+        inputValues: {
+          title: editedProduct ? editedProduct.title : '',
+          imageUrl: editedProduct ? editedProduct.imageUrl : '',
+          description: editedProduct ? editedProduct.description : '',
+          price: ''
+        },
+        inputValidities: {
+          title: editedProduct ? true : false,
+          imageUrl: editedProduct ? true : false,
+          description: editedProduct ? true : false,
+          price: editedProduct ? true : false
+        },
+        formIsValid: editedProduct ? true : false
+      });
 
+    const singUpHandler = () => {
+        dispatch(authActions.signup());
     };
 
     return (
