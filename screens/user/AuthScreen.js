@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useCallback } from 'react';
 import { ScrollView, View, KeyboardAvoidingView, StyleSheet, Button } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useDispatch } from 'react-redux';
@@ -52,6 +52,18 @@ const AuthScreen = props => {
         dispatch(authActions.signup());
     };
 
+    const inputChangeHandler = useCallback(
+        (inputIdentifier, inputValue, inputValidity) => {
+          dispatchFormState({
+            type: FORM_INPUT_UPDATE,
+            value: inputValue,
+            isValid: inputValidity,
+            input: inputIdentifier
+          });
+        },
+        [dispatchFormState]
+      );
+
     return (
         <KeyboardAvoidingView 
             behavior='padding'
@@ -69,7 +81,7 @@ const AuthScreen = props => {
                         email
                         autoCapitalize="none"
                         errorMessage="Please enter valid email address"
-                        onInputChange={() => {}}
+                        onInputChange={inputChangeHandler}
                         initialValue=""
                     />
                     <Input 
