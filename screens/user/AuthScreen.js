@@ -8,6 +8,8 @@ import Card from '../../components/UI/Card';
 import Colors from '../../constants/Colors';
 import * as authActions from '../../store/actions/auth';
 
+const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
+
 const formReducer = (state, action) => {
     if (action.type === FORM_INPUT_UPDATE) {
       const updatedValues = {
@@ -36,18 +38,14 @@ const AuthScreen = props => {
 
     const [formState, dispatchFormState] = useReducer(formReducer, {
         inputValues: {
-          title: editedProduct ? editedProduct.title : '',
-          imageUrl: editedProduct ? editedProduct.imageUrl : '',
-          description: editedProduct ? editedProduct.description : '',
-          price: ''
+          email: '',
+          password: ''
         },
         inputValidities: {
-          title: editedProduct ? true : false,
-          imageUrl: editedProduct ? true : false,
-          description: editedProduct ? true : false,
-          price: editedProduct ? true : false
+          email: false,
+          password: false
         },
-        formIsValid: editedProduct ? true : false
+        formIsValid: false
       });
 
     const singUpHandler = () => {
