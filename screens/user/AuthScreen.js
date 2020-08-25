@@ -1,12 +1,20 @@
 import React from 'react';
 import { ScrollView, View, KeyboardAvoidingView, StyleSheet, Button } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useDispatch } from 'react-redux';
 
 import Input from '../../components/UI/Input';
 import Card from '../../components/UI/Card';
 import Colors from '../../constants/Colors';
+import * as authActions from '../../store/actions/auth';
 
 const AuthScreen = props => {
+    const dispatch = useDispatch();
+
+    const singUpHandler = () => {
+
+    };
+
     return (
         <KeyboardAvoidingView 
             behavior='padding'
