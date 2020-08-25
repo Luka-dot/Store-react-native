@@ -49,7 +49,10 @@ const AuthScreen = props => {
       });
 
     const singUpHandler = () => {
-        dispatch(authActions.signup());
+        dispatch(authActions.signup(
+            formState.inputValues.email,
+            formState.inputValues.password
+        ));
     };
 
     const inputChangeHandler = useCallback(
@@ -80,7 +83,7 @@ const AuthScreen = props => {
                         required
                         email
                         autoCapitalize="none"
-                        errorMessage="Please enter valid email address"
+                        errorText="Please enter valid email address"
                         onInputChange={inputChangeHandler}
                         initialValue=""
                     />
@@ -92,7 +95,7 @@ const AuthScreen = props => {
                         required
                         minLength={5}
                         autoCapitalize="none"
-                        errorMessage="Please enter valid password"
+                        errorText="Please enter valid password"
                         onInputChange={() => {}}
                         initialValue=""
                     />
@@ -100,7 +103,7 @@ const AuthScreen = props => {
                     <Button 
                         title="login"
                         color={Colors.primary}
-                        onPress={() => {}}
+                        onPress={singUpHandler}
                     />
                     </View>
                     <View style={styles.buttonContainer}>
