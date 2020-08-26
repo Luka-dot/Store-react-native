@@ -41,7 +41,7 @@ const formReducer = (state, action) => {
 
 const AuthScreen = props => {
   const [isSignup, setIsSignup] = useState(false);
-  
+
   const dispatch = useDispatch();
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
@@ -56,7 +56,18 @@ const AuthScreen = props => {
     formIsValid: false
   });
 
-  const signupHandler = () => {
+  const authHandler = () => {
+    let action;
+    if (isSignup) {
+      dispatch(
+        authActions.signup(
+          formState.inputValues.email,
+          formState.inputValues.password
+        )
+      );
+    }  else {
+      action = authActions.logIn(formState.inputValues.email, formState.inputValues.password);
+    }
     dispatch(
       authActions.signup(
         formState.inputValues.email,
@@ -111,16 +122,18 @@ const AuthScreen = props => {
             />
             <View style={styles.buttonContainer}>
               <Button
-                title="Login"
+                title={ isSignup ? 'Sign up' : 'Login'}
                 color={Colors.primary}
-                onPress={signupHandler}
+                onPress={authHandler}
               />
             </View>
             <View style={styles.buttonContainer}>
               <Button
-                title="Switch to Sign Up"
+                title={ !isSignup ? 'Switch to Sign Up' : 'Switch to Login'}
                 color={Colors.accent}
-                onPress={() => {}}
+                onPress={() => {
+                  setIsSignup(prevState => !prevState);
+                }}
               />
             </View>
           </ScrollView>
