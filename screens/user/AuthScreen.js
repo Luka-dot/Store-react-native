@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useState, useReducer, useCallback } from 'react';
 import {
   ScrollView,
   View,
@@ -40,6 +40,8 @@ const formReducer = (state, action) => {
 };
 
 const AuthScreen = props => {
+  const [isSignup, setIsSignup] = useState(false);
+  
   const dispatch = useDispatch();
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
