@@ -103,7 +103,7 @@ const AuthScreen = props => {
               required
               minLength={5}
               autoCapitalize="none"
-              errorText="Please enter a valid password."
+              errorText="Please enter a valid password. Must be at least 5 characters."
               onInputChange={inputChangeHandler}
               initialValue=""
             />
@@ -129,7 +129,7 @@ const AuthScreen = props => {
 };
 
 AuthScreen.navigationOptions = {
-  headerTitle: 'Authenticate'
+  headerTitle: 'AUTHENTICATE'
 };
 
 const styles = StyleSheet.create({
