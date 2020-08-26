@@ -4,7 +4,8 @@ import {
   View,
   KeyboardAvoidingView,
   StyleSheet,
-  Button
+  Button,
+  ActivityIndicator
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useDispatch } from 'react-redux';
@@ -40,6 +41,7 @@ const formReducer = (state, action) => {
 };
 
 const AuthScreen = props => {
+  const [isLoading, setIsLoading] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
 
   const dispatch = useDispatch();
@@ -56,7 +58,7 @@ const AuthScreen = props => {
     formIsValid: false
   });
 
-  const authHandler = () => {
+  const authHandler = async () => {
     let action;
     if (isSignup) {
         action = authActions.signup(
@@ -69,7 +71,9 @@ const AuthScreen = props => {
         formState.inputValues.password
         );
     }
-    dispatch(action);
+    setIsLoading(true);
+    await dispatch(action);
+    setIsLoading(false);
   };
 
   const inputChangeHandler = useCallback(
