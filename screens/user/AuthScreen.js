@@ -121,11 +121,15 @@ const AuthScreen = props => {
               initialValue=""
             />
             <View style={styles.buttonContainer}>
+              {isLoading ? (
+                <ActivityIndicator size="small" color={Colors.primary} />
+              ) : (
               <Button
                 title={ isSignup ? 'Sign up' : 'Login'}
                 color={Colors.primary}
                 onPress={authHandler}
               />
+              )};
             </View>
             <View style={styles.buttonContainer}>
               <Button
