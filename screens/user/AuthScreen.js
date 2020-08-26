@@ -66,14 +66,12 @@ const AuthScreen = props => {
         )
       );
     }  else {
-      action = authActions.logIn(formState.inputValues.email, formState.inputValues.password);
-    }
-    dispatch(
-      authActions.signup(
-        formState.inputValues.email,
+      action = authActions.logIn(
+        formState.inputValues.email, 
         formState.inputValues.password
-      )
-    );
+        );
+    }
+    dispatch(action);
   };
 
   const inputChangeHandler = useCallback(
