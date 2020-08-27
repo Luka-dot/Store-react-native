@@ -27,6 +27,12 @@ const OrdersScreen = props => {
     </View>
   }
 
+  if (userProducts.length === 0) {
+    return <View style={styles.text}>
+        <Text>No orders found.</Text>
+    </View>
+}
+
   return (
     <FlatList
       data={orders}
@@ -64,7 +70,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
-  }
+  },
+  text: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+}
 })
 
 export default OrdersScreen;
+
