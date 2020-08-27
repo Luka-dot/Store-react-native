@@ -34,10 +34,11 @@ export const fetchOrders = () => {
 };
 
 export const addOrder = (cartItems, totalAmount) => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
     const date = new Date();
     // can execute any async code.
-    const response = await fetch('https://rn-store-9a607.firebaseio.com/orders/u1.json',
+    const response = await fetch(?auth=${token}`https://rn-store-9a607.firebaseio.com/orders/u1.json?auth=${token}`,
       {
         method: 'POST',
         headers: {
