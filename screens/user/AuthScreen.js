@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Button,
   ActivityIndicator,
-  Allert,
   Alert
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -44,9 +43,8 @@ const formReducer = (state, action) => {
 
 const AuthScreen = props => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isSignup, setIsSignup] = useState(false);
   const [error, setError] = useState();
-
+  const [isSignup, setIsSignup] = useState(false);
   const dispatch = useDispatch();
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
@@ -63,7 +61,7 @@ const AuthScreen = props => {
 
   useEffect(() => {
     if (error) {
-      Alert.alert('An error Occured!', error, [{ text: 'Okay' }]);
+      Alert.alert('An Error Occurred!', error, [{ text: 'Okay' }]);
     }
   }, [error]);
 
@@ -75,18 +73,18 @@ const AuthScreen = props => {
         formState.inputValues.password
       );
     } else {
-      action = authActions.logIn(
+      action = authActions.login(
         formState.inputValues.email,
         formState.inputValues.password
       );
     }
+    setError(null);
     setIsLoading(true);
     try {
       await dispatch(action);
     } catch (err) {
       setError(err.message);
     }
-    setError(null);
     setIsLoading(false);
   };
 
@@ -130,7 +128,7 @@ const AuthScreen = props => {
               required
               minLength={5}
               autoCapitalize="none"
-              errorText="Please enter a valid password. Must be at least 5 characters."
+              errorText="Please enter a valid password."
               onInputChange={inputChangeHandler}
               initialValue=""
             />
@@ -138,16 +136,16 @@ const AuthScreen = props => {
               {isLoading ? (
                 <ActivityIndicator size="small" color={Colors.primary} />
               ) : (
-                  <Button
-                    title={isSignup ? 'Sign up' : 'Login'}
-                    color={Colors.primary}
-                    onPress={authHandler}
-                  />
-                )};
+                <Button
+                  title={isSignup ? 'Sign Up' : 'Login'}
+                  color={Colors.primary}
+                  onPress={authHandler}
+                />
+              )}
             </View>
             <View style={styles.buttonContainer}>
               <Button
-                title={!isSignup ? 'Switch to Sign Up' : 'Switch to Login'}
+                title={`Switch to ${isSignup ? 'Login' : 'Sign Up'}`}
                 color={Colors.accent}
                 onPress={() => {
                   setIsSignup(prevState => !prevState);
@@ -162,7 +160,7 @@ const AuthScreen = props => {
 };
 
 AuthScreen.navigationOptions = {
-  headerTitle: 'AUTHENTICATE'
+  headerTitle: 'Authenticate'
 };
 
 const styles = StyleSheet.create({
