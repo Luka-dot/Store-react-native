@@ -6,8 +6,9 @@ export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const SET_PRODUCTS = 'SET_PRODUCTS';
 
 export const fetchProduct = () => {
-    return async dispatch => {
+    return async (dispatch, getState) => {
         // can execute any async code.
+        const userId = getState().auth.userId;
 
         try {
 
@@ -23,7 +24,7 @@ export const fetchProduct = () => {
             for (const key in resData) {
                 loadedProducts.push(new Product(
                     key,
-                    'u1',
+                    userId,
                     resData[key].title,
                     resData[key].imageUrl,
                     resData[key].description,
@@ -33,7 +34,8 @@ export const fetchProduct = () => {
 
             dispatch({
                 type: SET_PRODUCTS,
-                products: loadedProducts
+                products: loadedProducts,
+                userProducts: loadedProducts.filter(prod => prod.ownerId === userId)
             });
         } catch (err) {
             throw err;
@@ -63,6 +65,8 @@ export const createProduct = (title, description, imageUrl, price) => {
     return async (dispatch, getState) => {
         // can execute any async code.
         const token = getState().auth.token;
+        const userId = getState().auth.userId;
+
         const response = await fetch(`https://rn-store-9a607.firebaseio.com/products.json?auth=${token}`, {
             method: 'POST',
             headers: {
@@ -72,7 +76,8 @@ export const createProduct = (title, description, imageUrl, price) => {
                 title,
                 description,
                 imageUrl,
-                price
+                price,
+                ownerId: userId
             })
         });
 
@@ -89,7 +94,8 @@ export const createProduct = (title, description, imageUrl, price) => {
                 title: title,
                 description: description,
                 imageUrl: imageUrl,
-                price: price
+                price: price,
+                ownerId: userId
             }
         });
     }
