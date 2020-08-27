@@ -13,6 +13,10 @@ export default (state = initialState, action) => {
                 userId: action.userId
             }
         case SIGNUP:
+            return {
+                token: action.token,
+                userId: action.userId
+            }
         default:
             return state;
     }
