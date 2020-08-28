@@ -115,7 +115,7 @@ const saveDateToStorage = (token, userId, expirationDate) => {
 
 export const logout = () => {
   clearLogoutTimer();
-  AsyncStorage.removeItem{'userData'};
+  AsyncStorage.removeItem('userData');
   return { type: LOGOUT };
 };
 
