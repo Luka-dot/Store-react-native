@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
             return {
                 token: action.token,
                 userId: action.userId
-            },
+            };
         case LOGOUT:
             return initialState;
         // case SIGNUP:
