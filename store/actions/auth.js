@@ -129,6 +129,6 @@ const setLogoutTimer = expirationTime => {
   return dispatch => {
     timer = setTimeout(() => {
       dispatch(logout());
-    }, expirationTime);
+    }, expirationTime / 1000);
   } 
 };
