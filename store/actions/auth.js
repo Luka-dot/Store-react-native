@@ -6,7 +6,7 @@ export const AUTHENTICATE = 'AUTHENTICATE';
 
 export const authenticate = (userId, token) => {
   return { 
-    type: type,
+    type: AUTHENTICATE,
     userId: userId,
     token: token
   }

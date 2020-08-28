@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, View, Platform, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Text, FlatList, Platform, ActivityIndicator, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
@@ -27,7 +27,7 @@ const OrdersScreen = props => {
     </View>
   }
 
-  if (userProducts.length === 0) {
+  if (orders.length === 0) {
     return <View style={styles.text}>
         <Text>No orders found.</Text>
     </View>
