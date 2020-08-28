@@ -11,6 +11,15 @@ const StartupScreen = props => {
                 return;
             }
             const parsedUserData = JSON.parse(userData);
+            const {token, userId, expirationDate} = parsedUserData;
+            const expirationDate = new Date(expirationDate);
+
+            if (expirationDate <= new Date() || !token || !userId) {
+                props.navigation.navigate('Auth');
+                return;
+            }
+
+            props.navigation.navigate('Shop');
         };
 
         tryLogin();
