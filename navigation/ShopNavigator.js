@@ -98,23 +98,23 @@ const ShopNavigator = createDrawerNavigator(
     contentOptions: {
       activeTintColor: Colors.primary
     },
-    contentComponenet: props => {
+    contentComponent: props => {
       const dispatch = useDispatch();
-
-      return ( <View style={{flex: 1, padding: 20}}>
-                <SafeAreaView forceInset={{top: 'always', horizontal: 'never'}} >
-                  <DrawerNavigatorItems {...props} />
-                  <Button 
-                    title="Logout" 
-                    color={Colors.primary} 
-                    onPress={() => {
-                      dispatch(authActions.logout());
-                      props.navigation.navigate('Auth');
-                    }} 
-                  />
-                </SafeAreaView>
-              </View>
-      )
+      return (
+        <View style={{ flex: 1, paddingTop: 20 }}>
+          <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
+            <DrawerNavigatorItems {...props} />
+            <Button
+              title="Logout"
+              color={Colors.primary}
+              onPress={() => {
+                dispatch(authActions.logout());
+                // props.navigation.navigate('Auth');
+              }}
+            />
+          </SafeAreaView>
+        </View>
+      );
     }
   }
 );
