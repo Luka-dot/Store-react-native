@@ -37,7 +37,7 @@ export const signup = (email, password) => {
     dispatch({ 
       type: SIGNUP,
       token: resData.idToken,
-      userId: resData.localID
+      userId: resData.localId
     });
   };
 };
@@ -76,10 +76,10 @@ export const login = (email, password) => {
     dispatch({ 
       type: LOGIN,
       token: resData.idToken,
-      userId: resData.localID
+      userId: resData.localId
     });
     const expirationDate = new Date(new Date().getTime() + parseInt(resData.expiresIn) * 1000);
-    saveDateToStorage(resData.idToken, resData.localID);
+    saveDateToStorage(resData.idToken, resData.localId, expirationDate);
   };
 };
 
