@@ -1,5 +1,6 @@
 import React from 'react';
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 
 import { createStackNavigator }  from 'react-navigation-stack';
 import { createDrawerNavigator, DrawerNavigatorItems } from 'react-navigation-drawer';
@@ -29,6 +30,16 @@ const defaultNavOptions = {
     fontFamily: 'open-sans'
   },
   headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primary
+};
+
+const ProductStackNavigator = createStackNavigator();
+
+const ProductsNavigator = () => {
+  return <ProductStackNavigator>
+    <ProductStackNavigator.screen name="ProductsOverview" component={ProductsOverviewScreen} />
+    <ProductStackNavigator.screen name="ProductDetail" componenet={ProductDetailScreen} />
+    <ProductStackNavigator.screen name="Cart" componenet={CartScreen} />
+  </ProductStackNavigator>
 };
 
 const ProductsNavigator = createStackNavigator(
