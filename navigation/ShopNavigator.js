@@ -34,7 +34,7 @@ const defaultNavOptions = {
 
 const ProductStackNavigator = createStackNavigator();
 
-const ProductsNavigator = () => {
+export const ProductsNavigator = () => {
   return <ProductStackNavigator>
     <ProductStackNavigator.screen name="ProductsOverview" component={ProductsOverviewScreen} />
     <ProductStackNavigator.screen name="ProductDetail" componenet={ProductDetailScreen} />

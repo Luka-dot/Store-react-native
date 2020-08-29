@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 
-import ShopNavigator from './ShopNavigator';
+import { ProductsNavigator } from './ShopNavigator';
 import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen';
 
 
@@ -17,7 +17,7 @@ const AppNavigator = props => {
     // }, [isAuth])
 
     return ( <NavigationContainer>
-               
+               <ProductsNavigator />
             </NavigationContainer>
     );
 };
