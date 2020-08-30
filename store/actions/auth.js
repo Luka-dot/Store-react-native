@@ -65,7 +65,7 @@ export const signup = (email, password) => {
 export const login = (email, password) => {
   return async dispatch => {
     const response = await fetch(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDkm1Y5fG-StGlT2sIotG6bPRsKXW1l1wE',
+      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDkm1Y5fG-StGlT2sIotG6bPRsKXW1l1wE',
       {
         method: 'POST',
         headers: {
@@ -86,7 +86,7 @@ export const login = (email, password) => {
       if (errorId === 'EMAIL_NOT_FOUND') {
         message = 'This email could not be found!';
       } else if (errorId === 'INVALID_PASSWORD') {
-        message = 'This password is not valid!';
+        message = 'This password is invalid!';
       }
       throw new Error(message);
     }
