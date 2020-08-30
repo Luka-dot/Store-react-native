@@ -68,11 +68,17 @@ export const deleteProduct = productId => {
 export const createProduct = (title, description, imageUrl, price) => {
   return async (dispatch, getState) => {
     // any async code you want!
-    const statusObj = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+    let pushToken;
+    let statusObj = await Permissions.getAsync(Permissions.NOTIFICATIONS);
     if (statusObj.status !== 'granted') {
-      const updatedStatusObj = Permissions.askAsync(Permissions.NOTIFICATIONS);
+      statusObj = await Permissions.askAsync(Permissions.NOTIFICATIONS);
     }
-    Notifictions.getExpoPushTokenAsync();
+    if (statusObj.status !== 'granted') {
+      pushToken = null;
+    } else {
+      pushToken = (await Notifictions.getExpoPushTokenAsync()).data;
+    }
+
     const token = getState().auth.token;
     const userId = getState().auth.userId;
     const response = await fetch(
@@ -87,7 +93,8 @@ export const createProduct = (title, description, imageUrl, price) => {
           description,
           imageUrl,
           price,
-          ownerId: userId
+          ownerId: userId,
+          ownerPushToken: pushToken
         })
       }
     );
