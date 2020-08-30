@@ -110,7 +110,8 @@ export const createProduct = (title, description, imageUrl, price) => {
         description,
         imageUrl,
         price,
-        ownerId: userId
+        ownerId: userId,
+        pushToken: pushToken
       }
     });
   };
