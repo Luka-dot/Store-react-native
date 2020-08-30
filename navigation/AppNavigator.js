@@ -2,24 +2,20 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 
-import { ProductsNavigator } from './ShopNavigator';
-import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen';
-
+import { ShopNavigator, AuthNavigator } from './ShopNavigator';
+import StartupScreen from '../screens/StartupScreen';
 
 const AppNavigator = props => {
-    
-    const isAuth = useSelector(state => !!state.auth.token);
+  const isAuth = useSelector(state => !!state.auth.token);
+  const didTryAutoLogin = useSelector(state => state.auth.didTryAutoLogin);
 
-    // useEffect(() => {
-    //     if (!isAuth) {
-    //         navRef.current.dispatch(NavigationActions.navigate({ routeName: 'Auth'}));
-    //     }
-    // }, [isAuth])
-
-    return ( <NavigationContainer>
-               <ProductsNavigator />
-            </NavigationContainer>
-    );
+  return (
+    <NavigationContainer>
+      {isAuth && <ShopNavigator />}
+      {!isAuth && didTryAutoLogin && <AuthNavigator />}
+      {!isAuth && !didTryAutoLogin && <StartupScreen />}
+    </NavigationContainer>
+  );
 };
 
 export default AppNavigator;

@@ -61,7 +61,6 @@ export default (state = initialState, action) => {
       if (!state.items[action.pid]) {
         return state;
       }
-
       const updatedItems = { ...state.items };
       const itemTotal = state.items[action.pid].sum;
       delete updatedItems[action.pid];

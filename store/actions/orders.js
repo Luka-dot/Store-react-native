@@ -6,9 +6,10 @@ export const SET_ORDERS = 'SET_ORDERS';
 export const fetchOrders = () => {
   return async (dispatch, getState) => {
     const userId = getState().auth.userId;
-
     try {
-      const response = await fetch(`https://rn-store-9a607.firebaseio.com/orders/${userId}.json`);
+      const response = await fetch(
+        `https://rn-store-9a607.firebaseio.com/orders/${userId}.json`
+      );
 
       if (!response.ok) {
         throw new Error('Something went wrong!');
@@ -27,8 +28,7 @@ export const fetchOrders = () => {
           )
         );
       }
-
-      dispatch({ type: SET_ORDERS, orders: loadedOrders })
+      dispatch({ type: SET_ORDERS, orders: loadedOrders });
     } catch (err) {
       throw err;
     }
@@ -40,8 +40,8 @@ export const addOrder = (cartItems, totalAmount) => {
     const token = getState().auth.token;
     const userId = getState().auth.userId;
     const date = new Date();
-    // can execute any async code.
-    const response = await fetch(`https://rn-store-9a607.firebaseio.com/orders/u1.json?auth=${token}`,
+    const response = await fetch(
+      `https://rn-store-9a607.firebaseio.com/orders/${userId}.json?auth=${token}`,
       {
         method: 'POST',
         headers: {
@@ -63,7 +63,12 @@ export const addOrder = (cartItems, totalAmount) => {
 
     dispatch({
       type: ADD_ORDER,
-      orderData: { id: resData.name, items: cartItems, amount: totalAmount, date: date }
+      orderData: {
+        id: resData.name,
+        items: cartItems,
+        amount: totalAmount,
+        date: date
+      }
     });
   };
 };

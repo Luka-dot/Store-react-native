@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, Platform, ActivityIndicator, StyleSheet } from 'react-native';
+import {
+  View,
+  FlatList,
+  Text,
+  Platform,
+  ActivityIndicator,
+  StyleSheet
+} from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
@@ -22,16 +29,20 @@ const OrdersScreen = props => {
   }, [dispatch]);
 
   if (isLoading) {
-    return <View style={styles.centered}>
-      <ActivityIndicator size='large' color={Colors.primary} />
-    </View>
+    return (
+      <View style={styles.centered}>
+        <ActivityIndicator size="large" color={Colors.primary} />
+      </View>
+    );
   }
 
   if (orders.length === 0) {
-    return <View style={styles.text}>
-        <Text>No orders found.</Text>
-    </View>
-}
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>No order found, maybe start ordering some products?</Text>
+      </View>
+    );
+  }
 
   return (
     <FlatList
@@ -48,10 +59,10 @@ const OrdersScreen = props => {
   );
 };
 
-OrdersScreen.navigationOptions = navData => {
+export const screenOptions = navData => {
   return {
     headerTitle: 'Your Orders',
-    headerLeft: (
+    headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Menu"
@@ -70,13 +81,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  text: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-}
-})
+  }
+});
 
 export default OrdersScreen;
-
