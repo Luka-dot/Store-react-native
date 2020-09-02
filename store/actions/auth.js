@@ -52,6 +52,7 @@ export const signup = (email, password) => {
       authenticate(
         resData.localId,
         resData.idToken,
+        resData.email,
         parseInt(resData.expiresIn) * 1000
       )
     );
@@ -97,7 +98,8 @@ export const login = (email, password) => {
       authenticate(
         resData.localId,
         resData.idToken,
-        parseInt(resData.expiresIn) * 1000
+        parseInt(resData.expiresIn) * 1000,
+        resData.email
       )
     );
     const expirationDate = new Date(
@@ -133,7 +135,8 @@ const saveDataToStorage = (token, userId, expirationDate) => {
     JSON.stringify({
       token: token,
       userId: userId,
-      expiryDate: expirationDate.toISOString()
+      expiryDate: expirationDate.toISOString(),
+      email: email
     })
   );
 };

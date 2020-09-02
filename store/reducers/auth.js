@@ -3,6 +3,7 @@ import { AUTHENTICATE, LOGOUT, SET_DID_TRY_AL } from '../actions/auth';
 const initialState = {
   token: null,
   userId: null,
+  email: null,
   didTryAutoLogin: false
 };
 
@@ -12,8 +13,10 @@ export default (state = initialState, action) => {
       return {
         token: action.token,
         userId: action.userId,
+        email: action.email,
         didTryAutoLogin: true
       };
+      console.log(state)
     case SET_DID_TRY_AL:
       return {
         ...state,

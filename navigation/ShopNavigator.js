@@ -1,9 +1,9 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator, DrawerItemList } from '@react-navigation/drawer';
-import { Platform, SafeAreaView, Button, View } from 'react-native';
+import { Platform, SafeAreaView, Button, View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ProductsOverviewScreen, { screenOptions as productsOverviewScreenOptions } from '../screens/shop/ProductsOverviewScreen';
 import ProductDetailScreen, { screenOptions as productDetailScreenOptions } from '../screens/shop/ProductDetailScreen';
@@ -12,9 +12,9 @@ import OrdersScreen, { screenOptions as ordersScreenOptions } from '../screens/s
 import UserProductsScreen, { screenOptions as userProductsScreenOptions } from '../screens/user/UserProductsScreen';
 import EditProductScreen, { screenOptions as editProductScreenOptions } from '../screens/user/EditProductScreen';
 import AuthScreen, { screenOptions as authScreenOptions } from '../screens/user/AuthScreen';
-import StartupScreen from '../screens/StartupScreen';
 import Colors from '../constants/Colors';
 import * as authActions from '../store/actions/auth';
+
 
 const defaultNavOptions = {
   headerStyle: {
@@ -90,22 +90,27 @@ const ShopDrawerNavigator = createDrawerNavigator();
 
 export const ShopNavigator = () => {
   const dispatch = useDispatch();
+  const loggedUser = useSelector( state => state.auth.email );
+  console.log(loggedUser)
 
   return (
     <ShopDrawerNavigator.Navigator
       drawerContent={props => {
         return (
-          <View style={{ flex: 1, paddingTop: 20, justifyContent: 'center', alignItems: 'center' }}>
+          <View style={{ flex: 1, paddingTop: 20, alignItems: 'center' }}>
             <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
               <DrawerItemList {...props} />
+              <View style={{ paddingTop: '90%' }}>
+              <Text>user : { loggedUser }</Text>
               <Button
-                title="Logout"
+                title="Logout" 
                 color={Colors.primary}
                 onPress={() => {
                   dispatch(authActions.logout());
                   // props.navigation.navigate('Auth');
                 }}
               />
+              </View>
             </SafeAreaView>
           </View>
         );
