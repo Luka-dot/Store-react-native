@@ -90,7 +90,7 @@ const ShopDrawerNavigator = createDrawerNavigator();
 
 export const ShopNavigator = () => {
   const dispatch = useDispatch();
-  const loggedUser = useSelector( state => state.auth.email );
+  const loggedUser = useSelector( state => state.auth.userId );
   console.log(loggedUser)
 
   return (

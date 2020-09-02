@@ -16,7 +16,6 @@ export default (state = initialState, action) => {
         email: action.email,
         didTryAutoLogin: true
       };
-      console.log(state)
     case SET_DID_TRY_AL:
       return {
         ...state,
@@ -35,4 +34,5 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
+  console.log(state)
 };
