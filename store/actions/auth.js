@@ -15,7 +15,7 @@ export const setDidTryAL = () => {
 export const authenticate = (userId, token, expiryTime) => {
   return dispatch => {
     dispatch(setLogoutTimer(expiryTime));
-    dispatch({ type: AUTHENTICATE, userId: userId, token: token });
+    dispatch({ type: AUTHENTICATE, userId: userId, token: token, userEmail: email });
   };
 };
 

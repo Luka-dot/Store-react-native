@@ -5,6 +5,7 @@ import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import ReduxThunk from 'redux-thunk';
 import * as Notifications from 'expo-notifications';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import productsReducer from './store/reducers/products';
 import cartReducer from './store/reducers/cart';
