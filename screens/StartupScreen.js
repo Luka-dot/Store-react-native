@@ -1,10 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  View,
-  ActivityIndicator,
-  StyleSheet,
-  AsyncStorage
-} from 'react-native';
+import { View, ActivityIndicator, StyleSheet,AsyncStorage } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import Colors from '../constants/Colors';
@@ -21,6 +16,7 @@ const StartupScreen = props => {
         dispatch(authActions.setDidTryAL());
         return;
       }
+
       const transformedData = JSON.parse(userData);
       const { token, userId, email, expiryDate } = transformedData;
       const expirationDate = new Date(expiryDate);
