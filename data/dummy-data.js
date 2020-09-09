@@ -25,6 +25,7 @@ const PRODUCTS = [
     'Can also be used for tea!',
     8.99
   ),
+  
   new Product(
     'p4',
     'u3',
@@ -33,6 +34,7 @@ const PRODUCTS = [
     "What the content is? Why would that matter? It's a limited edition!",
     15.99
   ),
+
   new Product(
     'p5',
     'u3',
@@ -41,6 +43,7 @@ const PRODUCTS = [
     'Awesome hardware, crappy keyboard and a hefty price. Buy now before a new one is released!',
     2299.99
   ),
+
   new Product(
     'p6',
     'u1',
